@@ -2,3 +2,5 @@
 
 /app
 /terraform
+/.terraform
+/.terraform.lock.hcl
