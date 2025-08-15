@@ -1,0 +1,44 @@
+---
+# - name: Node js deployment
+#   hosts: web_server
+#   remote_user: ec2-user
+
+#   tasks:
+- name: Updating all packages
+  ansible.builtin.yum:
+    name: "*"
+    state: latest
+  become: true
+
+- name: Installing NodeJs and Npm
+  become: true
+  ansible.builtin.yum:
+    pkg:
+      - nodejs
+      - npm
+      - git
+
+- name: Cloning the repo
+  ansible.builtin.git:
+    repo: "https://github.com/abirthapa1/nodejs-service-deployment.git"
+    dest: /home/ec2-user/projects
+
+- name: Installing the dependencies
+  community.general.npm:
+    path: /home/ec2-user/projects/node_service/
+
+- name: Start the application
+  become: true
+  ansible.builtin.command: node main.js
+  async: 1000
+  poll: 0
+  args:
+    chdir: /home/ec2-user/projects/node_service/
+
+- name: Ensuring the application is running
+  ansible.builtin.shell: ps aux | grep main.js
+  register: app_status
+
+- name: Debug
+  ansible.builtin.debug:
+    msg: "{{app_status.stdout_lines}}"

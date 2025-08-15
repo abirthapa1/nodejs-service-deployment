@@ -1,0 +1,6 @@
+---
+- name: "Deploying Node.js app"
+  hosts: web_server
+  become: true
+  roles:
+    - app
