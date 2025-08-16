@@ -22,16 +22,10 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ec2-user
           key: ${{secrets.SSH_KEY}}
-          script: |
-            ls
-            cd projects
-            cat node_service.yaml
-            ansible-playbook -i host.ini node_service.yaml
+          script: ls -a
 
-      # - name: "Run ansible script"
-      #   shell: bash
-      #   run: |
-      #     service ssh status
-      #     cd projects
-      #     cat node_service.yaml
-      #     ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa -i hosts.ini node_service.yaml
+      - name: "Install ansible"
+        run: sudo apt-get update -y && sudo apt-get install -y ansible
+
+      - name: "Run the playbook"
+        run: ansible-playbook -i hosts.ini node_service.yaml
