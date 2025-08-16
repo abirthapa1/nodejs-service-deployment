@@ -57,4 +57,17 @@ resource "aws_instance" "Node_Js" {
 
     #security group configuration
     vpc_security_group_ids = [ aws_security_group.Node-Js-SG.id ]
+
+    connection {
+      type = "ssh"
+      user = "ec2-user"
+      private_key = file(var.ssh_key_private)
+      host = self.public_ip
+    }
+    provisioner "remote-exec" {
+      inline = [ 
+        "sudo yum update -y && sudo amazon-linux-extras install ansible2 -y",
+        "sleep 60s"
+       ]
+    }
 }

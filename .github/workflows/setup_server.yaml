@@ -1,0 +1,35 @@
+name: Setting up server
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+  Node-server:
+    name: "Running a node server using ansible playbook"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Check Github repo"
+        uses: actions/checkout@v3
+
+      - name: "Setting up SSH"
+        shell: bash
+        run: |
+          eval `ssh-agent-s`
+          mkdir -p /home/runner/.ssh
+          touch /home/runner/.ssh/id_rsa
+          echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_rsa
+          chmod 700 /home/runner/.ssh/id_rsa
+          ssh-keyscan -t rsa,dsa,ecdsa,ed25519 ${{secrets.SSH_HOST}} >> /home/runner/.ssh/known_hosts
+
+      - name: "Run ansible script"
+        shell: bash
+        run: |
+          service ssh status
+          cd projects
+          cat node_service.yaml
+          ansible-playbook -vvv --private-key /home/runner/.ssh/id_rsa -i hosts.ini node_service.yaml
