@@ -23,6 +23,8 @@ jobs:
           username: ec2-user
           key: ${{secrets.SSH_KEY}}
           script: |
+            ls
+            cd projects
             cat node_service.yaml
             ansible-playbook -i host.ini node_service.yaml
 
