@@ -19,7 +19,6 @@ jobs:
       - name: "Setting up SSH"
         shell: bash
         run: |
-          service ssh status
           service ssh start
           eval `ssh-agent -s`
           mkdir -p /home/runner/.ssh
