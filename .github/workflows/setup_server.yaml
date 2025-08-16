@@ -20,6 +20,7 @@ jobs:
         shell: bash
         run: |
           service ssh status
+          service ssh start
           eval `ssh-agent -s`
           mkdir -p /home/runner/.ssh
           touch /home/runner/.ssh/id_rsa
