@@ -19,7 +19,7 @@ jobs:
       - name: "Setting up SSH"
         shell: bash
         run: |
-          eval `ssh-agent-s`
+          eval `ssh-agent -s`
           mkdir -p /home/runner/.ssh
           touch /home/runner/.ssh/id_rsa
           echo -e "${{secrets.SSH_KEY}}" > /home/runner/.ssh/id_rsa
