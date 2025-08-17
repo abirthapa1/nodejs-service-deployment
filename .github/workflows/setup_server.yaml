@@ -16,13 +16,17 @@ jobs:
       - name: "Check Github repo"
         uses: actions/checkout@v3
 
-      - name: "Setting up SSH"
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{secrets.SSH_HOST}}
-          username: ec2-user
-          key: ${{secrets.SSH_KEY}}
-          script: ls -a
+      # - name: "Setting up SSH"
+      #   uses: appleboy/ssh-action@v1
+      #   with:
+      #     host: ${{secrets.SSH_HOST}}
+      #     username: ec2-user
+      #     key: ${{secrets.SSH_KEY}}
+      #     script: |
+      #       mkdir -p ~/.ssh
+      #       echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+      #       chmod 600 ~/.ssh/id_rsa
+      #       ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: "Install ansible"
         run: sudo apt-get update -y && sudo apt-get install -y ansible
