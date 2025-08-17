@@ -11,23 +11,28 @@ This repository contains Infrastructure as Code (IaC) and automation scripts to 
 
 ## 📂 Project Structure
 
---this needs to be worked on--
-nodejs-service-deployment
+```bash
+nodej-service-deployment/
 ├── .github/
-│ └── workflows/
-│
+│   └── workflows/
+│       └── setup_server.yaml
 ├── node_service/
-│
+│   ├── main.js
+│   ├── package.json
+│   └── package-lock.json
 ├── roles/
-│ └── app/
-│ └── tasks/
-│
+│   └── app/
+│       └── tasks/
+│           └── main.yaml
 ├── terraform/
-│
+│   ├── main.tf
+│   ├── outputs.tf
+│   └── variables.tf
 ├── .gitignore
+├── README.md
 ├── hosts.ini
-├── node_service.yaml
-└── README.md
+└── node_service.yaml
+```
 
 ---
 
