@@ -23,12 +23,12 @@
 - name: Cloning the repo
   ansible.builtin.git:
     repo: "https://github.com/abirthapa1/nodejs-service-deployment.git"
-    dest: /home/ec2-user/projects
+    path: /home/ec2-user
   tags: app
 
 - name: Installing the dependencies
   community.general.npm:
-    path: /home/ec2-user/projects/node_service/
+    path: /home/ec2-user/nodejs-service-deployment/node_service
   tags: app
 
 - name: Start the application
@@ -37,7 +37,7 @@
   async: 1000
   poll: 0
   args:
-    chdir: /home/ec2-user/projects/node_service/
+    chdir: /home/ec2-user/nodejs-service-deployment/node_service
   tags: app
 
 - name: Ensuring the application is running

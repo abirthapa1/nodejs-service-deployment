@@ -86,15 +86,16 @@ ansible-playbook -i hosts.ini node_service.yaml --tags app
 
 ### 4️⃣ CI/CD with GitHub Actions
 
-Note: Make sure you have added the secrets with the correct naming as written in the workflow yaml.
+**Note**: Make sure you have added the secrets with the correct naming as written in the workflow yaml.
 
 If not then you can check this documentation on how to add one
 https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
 
-- Push changes to the main branch.
-- The GitHub Actions workflow:
-  - Checks out the repo
-  - Set's up the SSH for Ansible
-  - Installs Ansible
-  - Runs the playbook
-  - Deploys the Node.js service automatically
+1. Push changes to the main branch.
+2. The GitHub Actions workflow:
+
+- Checks out the repo
+- Set's up the SSH for Ansible
+- Installs Ansible
+- Runs the playbook
+- Deploys the Node.js service automatically
