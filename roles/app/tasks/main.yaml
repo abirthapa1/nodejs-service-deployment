@@ -23,7 +23,7 @@
 - name: Cloning the repo
   ansible.builtin.git:
     repo: "https://github.com/abirthapa1/nodejs-service-deployment.git"
-    path: /home/ec2-user
+    dest: /home/ec2-user
   tags: app
 
 - name: Installing the dependencies
