@@ -22,21 +22,17 @@ jobs:
           host: ${{secrets.SSH_HOST}}
           username: ec2-user
           key: ${{secrets.SSH_KEY}}
-          script: |
-            mkdir -p ~/.ssh
-            echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+          script: ls -a
 
       - name: "Install ansible"
         run: sudo apt-get update -y && sudo apt-get install -y ansible
 
-      # - name: "Setup SSH for Ansible"
-      #   run: |
-      #     mkdir -p ~/.ssh
-      #     echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-      #     chmod 600 ~/.ssh/id_rsa
-      #     ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: "Setup SSH for Ansible"
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: "Run the playbook"
         run: ansible-playbook -i hosts.ini node_service.yaml --tags app
