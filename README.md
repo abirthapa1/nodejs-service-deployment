@@ -87,8 +87,11 @@ ansible-playbook -i hosts.ini node_service.yaml --tags app
 ### 4️⃣ CI/CD with GitHub Actions
 
 **Note**: Make sure you have added the secrets with the correct naming as written in the workflow yaml.
+
+```bash
 SSH_HOST: <public-ip-address>
 SSH_KEY: <private-key-file>
+```
 
 If not then you can check this documentation on how to add one
 https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
@@ -101,3 +104,7 @@ https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows
 - Installs Ansible
 - Runs the playbook
 - Deploys the Node.js service automatically
+
+```
+
+```
